@@ -1145,7 +1145,7 @@ const Sound = (() => {
   const ok = () => ac && prefs.sfx;
   const fx = {
     // a happy little "yip" when the dog jumps
-    jump(){ if (!ok()) return; tone(620, .1, {type:"triangle", vol:.34, slide:1180, attack:.004}); tone(1240, .07, {type:"sine", vol:.1, at:.01, slide:1750}); noise(.03, {vol:.06, hp:2500}); },
+    jump(){ if (!ok()) return; tone(300, .12, {type:"triangle", vol:.4, slide:560, attack:.004}); tone(600, .08, {type:"sine", vol:.1, at:.01, slide:860}); noise(.03, {vol:.05, hp:1200, lp:3000}); },
     // crunchy munch with a squeak for each treat
     coin(){ if (!ok()) return; noise(.045, {vol:.22, hp:1600, lp:5200}); noise(.04, {vol:.18, at:.07, hp:1800, lp:5200}); tone(1250, .07, {type:"triangle", vol:.12, at:.02, slide:1700}); tone(1700, .06, {type:"square", vol:.035, at:.1, slide:1300, cutoff:4000}); },
     // "woof woof!" for clearing a round
@@ -1747,7 +1747,7 @@ function drawObs(o){
   const P=(x,y,w,h,c)=>{ctx.fillStyle=c;ctx.fillRect(Math.floor(x),Math.floor(y),w,h)};
   const x = Math.floor(o.x), y = Math.floor(o.y);
   const glow = {cone:"#ff5a5a", barrel:"#3aff8a", tires:"#ffb84a", barrier:"#ffe04a", tire:"#e8ff4a", bar:"#8aff6a"}[o.type];
-  ctx.save(); ctx.shadowColor = glow; ctx.shadowBlur = 9;
+  ctx.save(); ctx.shadowColor = glow + "88"; ctx.shadowBlur = 3;
   if (o.type === "cone"){            // fire hydrant
     const R = "#ff2e2e", R2 = "#c81414", HI = "#ffb0a0", O = "#4a0606";
     P(x+1, y+2, 12, o.h-2, O); P(x+3, y, 8, 3, O);
@@ -1781,7 +1781,7 @@ function drawObs(o){
   } else if (o.type === "bar"){      // low tree branch hanging on vines
     ctx.shadowBlur = 0;
     for (let cy = 0; cy < y; cy += 6){ P(x+5, cy, 2, 4, "rgba(80,200,90,.7)"); P(x+o.w-7, cy, 2, 4, "rgba(80,200,90,.7)"); }
-    ctx.shadowBlur = 9;
+    ctx.shadowBlur = 3;
     P(x-2, y+2, o.w+4, 7, "#2a1806"); P(x-1, y+3, o.w+2, 5, "#9a6230"); P(x, y+3, o.w, 1, "#c88a50");
     [[-4,-2],[8,-4],[20,-3],[32,-4],[42,-2]].forEach(([dx,dy]) => { P(x+dx, y+dy, 8, 5, "#1e7a26"); P(x+dx+1, y+dy, 6, 4, "#5cff5a"); P(x+dx+2, y+dy, 2, 1, "#c8ffb0"); });
     P(x+10, y+o.h-1, 6, 4, "#5cff5a"); P(x+28, y+o.h-1, 6, 4, "#5cff5a");
